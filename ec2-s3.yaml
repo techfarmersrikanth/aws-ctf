@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Sample CloudFormation template to create EC2 and S3
+
+Parameters:
+  KeyName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Name of an existing EC2 KeyPair to enable SSH access
+  InstanceType:
+    Type: String
+    Default: t3.micro
+    Description: EC2 instance type
+
+Mappings:
+  RegionMap:
+    us-east-1:
+      AMI: ami-0c02fb55956c7d316   # Amazon Linux 2 - N. Virginia
+    eu-west-3:
+      AMI: ami-0abcdef1234567890   # Correct Amazon Linux 2 AMI for Paris
+    ap-south-1:
+      AMI: ami-0522ab6e1ddcc7055   # Amazon Linux 2 - Mumbai
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+
+  MySecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyName
+      ImageId: !FindInMap [RegionMap, !Ref "AWS::Region", AMI]
+      SecurityGroupIds:
+        - !Ref MySecurityGroup
+
+Outputs:
+  BucketName:
+    Value: !Ref MyS3Bucket
+    Description: Name of the created S3 bucket
+
+  InstanceId:
+    Value: !Ref MyEC2Instance
+    Description: ID of the created EC2 instance
