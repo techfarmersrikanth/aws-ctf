@@ -15,8 +15,8 @@ Parameters:
 
 Mappings:
   RegionMap:
-    us-east-1:
-      AMI: ami-0ec10929233384c7f
+    ap-south-1:
+      AMI: ami-05d2d839d4f73aafb
 
 Conditions:
   IsProd: !Equals [ !Ref EnvType, prod ]
@@ -50,7 +50,7 @@ Resources:
     Properties:
       VpcId: !Ref MyVPC
       CidrBlock: 10.0.1.0/24
-      AvailabilityZone: us-east-1a
+      AvailabilityZone: ap-south-1a
       MapPublicIpOnLaunch: true
 
   PublicSubnet2:
@@ -58,7 +58,7 @@ Resources:
     Properties:
       VpcId: !Ref MyVPC
       CidrBlock: 10.0.2.0/24
-      AvailabilityZone: us-east-1b
+      AvailabilityZone: ap-south-1b
       MapPublicIpOnLaunch: true
 
 # ---------------- Route Table ----------------
