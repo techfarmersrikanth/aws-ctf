@@ -1,0 +1,17 @@
+Parameters:
+  EnvType:
+    Type: String
+    AllowedValues:
+      - dev
+      - prod
+
+Conditions:
+  CreateProdResources: !Equals [ !Ref EnvType, prod ]
+
+Resources:
+  MyEC2:
+    Type: AWS::EC2::Instance
+    Condition: CreateProdResources
+    Properties:
+      InstanceType: t3.micro
+      ImageId: ami-0ec10929233384c7f
