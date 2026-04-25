@@ -5,7 +5,7 @@ Resources:
     Properties:
       VersioningConfiguration:
         Status: Enabled
-      BucketName: mysrikde
+      BucketName: mysrini_Dr
       Tags: 
         - Key: env
           Value: mybucket
