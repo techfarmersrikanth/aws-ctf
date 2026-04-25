@@ -160,11 +160,11 @@ Resources:
             #!/bin/bash
             apt update -y
             apt install -y apache2
-           systemctl enable apache2
-           systemctl start apache2
-           echo "Hello from $(hostname)" > /var/www/html/index.html
+            systemctl enable apache2
+            systemctl start apache2
+            echo "Hello from $(hostname)" > /var/www/html/index.html
   # Debug logs
-           systemctl status apache2 > /tmp/apache2-status.txt
+            systemctl status apache2 > /tmp/apache2-status.txt
  # Debug logs
             systemctl status apache2 > /tmp/apache2-status.txt
 # ---------------- Auto Scaling Group ----------------
